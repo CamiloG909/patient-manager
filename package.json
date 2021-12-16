@@ -1,0 +1,13 @@
+{
+  "name": "management-patients",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+		"dev": "nodemon src/index",
+    "start": "node src/index"
+  },
+  "keywords": [],
+  "author": "Camilo Galindo R <cgalindorivera@gmail.com>",
+  "license": "MIT"
+}

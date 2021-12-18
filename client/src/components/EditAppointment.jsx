@@ -1,35 +1,22 @@
-import React, { Fragment, useEffect, useState } from "react";
-import cliAxios from "../config/axios";
+import React, { Fragment } from "react";
 import Form from "./Form";
+import { Link, useParams } from "react-router-dom";
 
-const EditAppointment = ({ setPage }) => {
-	let page = window.location.pathname;
-	page = page.slice(1);
+const EditAppointment = ({ appointments }) => {
+	// Get id from params
+	let id = useParams();
+	id = id.id;
 
-	const [appointment, setAppointment] = useState([]);
-
-	const getData = async () => {
-		const response = await cliAxios.get(`appointment/${page}`);
-
-		setAppointment(response.data);
-	};
-
-	useEffect(() => {
-		getData();
-	}, []);
-
-	const toPage = (page) => (e) => {
-		e.preventDefault();
-
-		window.history.pushState(null, null, `/${page}`);
-		setPage(page);
-	};
+	let appointment = appointments.filter(
+		(appointment) => appointment._id === id
+	);
+	appointment = appointment[0];
 
 	return (
 		<Fragment>
-			<a href="/" className="page-btn" onClick={toPage("")}>
+			<Link to="/" className="page-btn">
 				<i className="bi bi-arrow-left"></i> Back
-			</a>
+			</Link>
 			<div className="edit-appointment">
 				<section className="edit-appointment__info">
 					<p className="edit-appointment__info-text --green">

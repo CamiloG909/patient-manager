@@ -1,19 +1,13 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import AppointmentCard from "./AppointmentCard";
 
 const Home = ({ setPage, appointments }) => {
-	const toPage = (page) => (e) => {
-		e.preventDefault();
-
-		window.history.pushState(null, null, `/${page}`);
-		setPage(page);
-	};
-
 	return (
 		<Fragment>
-			<a className="page-btn" href="/" onClick={toPage("add")}>
+			<Link to="/add" className="page-btn">
 				New appointment <i className="bi bi-plus-circle-fill"></i>
-			</a>
+			</Link>
 			{appointments.map(({ _id, name, age, date, time, symptoms }) => (
 				<AppointmentCard
 					key={_id}

@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import New from "./components/NewAppointment";
 import Edit from "./components/EditAppointment";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
 	const [appointments, setAppointments] = useState([]);
@@ -21,30 +22,24 @@ function App() {
 		getData();
 	}, [loaddata]);
 
-	// Router
-	const [page, setPage] = useState(() => {
-		const { pathname } = window.location;
-		const page = pathname.slice(1);
-
-		return page;
-	});
-
-	const getContent = () => {
-		if (page === "") {
-			return <Home setPage={setPage} appointments={appointments} />;
-		} else if (page === "add") {
-			return <New setPage={setPage} setLoaddata={setLoaddata} />;
-		} else {
-			return <Edit setPage={setPage} />;
-		}
-	};
-	// End router
-
 	return (
 		<Fragment>
 			<main>
 				<Header />
-				<section className="container">{getContent()}</section>
+				<section className="container">
+					<Router>
+						<Routes>
+							<Route path="/">
+								<Route path="" element={<Home appointments={appointments} />} />
+								<Route path="add" element={<New setLoaddata={setLoaddata} />} />
+								<Route
+									path="appointment/:id"
+									element={<Edit appointments={appointments} />}
+								/>
+							</Route>
+						</Routes>
+					</Router>
+				</section>
 			</main>
 			<Toaster
 				position="bottom-center"

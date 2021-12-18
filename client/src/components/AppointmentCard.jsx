@@ -1,13 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AppointmentCard = ({ id, name, age, date, time, symptoms, setPage }) => {
-	const toPage = (page) => (e) => {
-		e.preventDefault();
-
-		window.history.pushState(null, null, `/${page}`);
-		setPage(page);
-	};
-
 	return (
 		<article className="appointment-card">
 			<section className="appointment-card__info">
@@ -19,9 +13,9 @@ const AppointmentCard = ({ id, name, age, date, time, symptoms, setPage }) => {
 				<p className="appointment-card__text symptoms">Symptoms: {symptoms}</p>
 				<p className="appointment-card__text">Age: {age}</p>
 			</section>
-			<a className="appointment-card__btn" href={id} onClick={toPage(id)}>
+			<Link className="appointment-card__btn" to={`appointment/${id}`}>
 				Edit <i className="bi bi-pencil-fill"></i>
-			</a>
+			</Link>
 		</article>
 	);
 };

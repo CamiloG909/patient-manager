@@ -1,16 +1,10 @@
 import React, { Fragment, useState } from "react";
 import Form from "./Form";
 import cliAxios from "../config/axios";
+import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const NewAppointment = ({ setPage, setLoaddata }) => {
-	const toPage = (page) => (e) => {
-		e.preventDefault();
-
-		window.history.pushState(null, null, `/${page}`);
-		setPage(page);
-	};
-
 	const [appointment, setAppointment] = useState({
 		name: "",
 		age: "",
@@ -38,9 +32,9 @@ const NewAppointment = ({ setPage, setLoaddata }) => {
 
 	return (
 		<Fragment>
-			<a href="/" className="page-btn" onClick={toPage("")}>
+			<Link to="/" className="page-btn">
 				<i className="bi bi-arrow-left"></i> Back
-			</a>
+			</Link>
 			<div className="new-appointment">
 				<p className="form__title">Add new appointment</p>
 				<Form

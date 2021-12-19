@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({ appointment, setAppointment, f }) => {
+const Form = ({ appointment, setAppointment, functionSubmit }) => {
 	const saveAppointment = (e) => {
 		setAppointment({
 			...appointment,
@@ -9,7 +9,7 @@ const Form = ({ appointment, setAppointment, f }) => {
 	};
 
 	return (
-		<form onSubmit={f}>
+		<form onSubmit={functionSubmit}>
 			<input
 				className="form__input"
 				placeholder="Name"

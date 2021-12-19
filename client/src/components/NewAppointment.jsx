@@ -1,10 +1,12 @@
 import React, { Fragment, useState } from "react";
 import Form from "./Form";
 import cliAxios from "../config/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const NewAppointment = ({ setPage, setLoaddata }) => {
+	let navigate = useNavigate();
+
 	const [appointment, setAppointment] = useState({
 		name: "",
 		age: "",
@@ -20,13 +22,12 @@ const NewAppointment = ({ setPage, setLoaddata }) => {
 			.post("appointment", appointment)
 			.then((res) => {
 				setLoaddata(Date.now());
-				window.history.pushState(null, null, `/`);
-				setPage("");
 
 				toast.success(res.data.message);
+				navigate("/");
 			})
 			.catch((err) => {
-				toast.error("An ocurred error");
+				toast.error("An ocurred has error");
 			});
 	};
 
@@ -40,7 +41,7 @@ const NewAppointment = ({ setPage, setLoaddata }) => {
 				<Form
 					setAppointment={setAppointment}
 					appointment={appointment}
-					f={addAppointment}
+					functionSubmit={addAppointment}
 				/>
 			</div>
 		</Fragment>

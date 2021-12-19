@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AppointmentCard = ({ id, name, age, date, time, symptoms, setPage }) => {
+const AppointmentCard = ({ id, name, age, date, time, symptoms }) => {
 	return (
 		<article className="appointment-card">
 			<section className="appointment-card__info">

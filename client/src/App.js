@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import cliAxios from "./config/axios";
-import { Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -13,9 +13,13 @@ function App() {
 	const [loaddata, setLoaddata] = useState("load");
 
 	const getData = async () => {
-		const response = await cliAxios.get("appointments");
+		try {
+			const response = await cliAxios.get("appointments");
 
-		setAppointments(response.data);
+			setAppointments(response.data);
+		} catch {
+			toast.error("An error has ocurred");
+		}
 	};
 
 	useEffect(() => {
@@ -34,7 +38,7 @@ function App() {
 								<Route path="add" element={<New setLoaddata={setLoaddata} />} />
 								<Route
 									path="appointment/:id"
-									element={<Edit appointments={appointments} />}
+									element={<Edit setLoaddata={setLoaddata} />}
 								/>
 							</Route>
 						</Routes>
@@ -42,7 +46,7 @@ function App() {
 				</section>
 			</main>
 			<Toaster
-				position="bottom-center"
+				position="bottom-right"
 				toastOptions={{
 					duration: 1500,
 					style: {
